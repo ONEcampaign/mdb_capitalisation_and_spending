@@ -54,15 +54,15 @@ def summarise_outflows_year_type(df: pd.DataFrame, grouper: list[str]) -> pd.Dat
     return df
 
 
-def add_mdb_total(df: pd.DataFrame, grouper: list[str]) -> pd.DataFrame:
+def add_mdb_total(
+    df: pd.DataFrame, grouper: list[str], column_name: str = "donor_name"
+) -> pd.DataFrame:
     """Add a yearly total for the MDBs being studied."""
-    df_total = (
-        df.groupby(by=grouper, observed=True, dropna=False, as_index=False)[
-            ["usd_commitment", "usd_disbursement"]
-        ]
-        .sum()
-        .assign(donor_name="Total")
-    )
+    df_total = df.groupby(by=grouper, observed=True, dropna=False, as_index=False)[
+        ["usd_commitment", "usd_disbursement"]
+    ].sum()
+
+    df_total[column_name] = "Total"
 
     df = pd.concat([df, df_total], ignore_index=True)
 
@@ -96,9 +96,6 @@ def export_mdb_outflows(years: list[int] | range) -> None:
     df_summary.to_csv(config.Paths.output / "mdb_outflows_summary.csv", index=False)
     logger.info("Data saved to mdb_outflows_summary.csv")
 
-    return df_by_flow
-
 
 if __name__ == "__main__":
-    df = export_mdb_outflows(years=range(2010, 2023))
-    latest = df.query("year == 2022")
+    export_mdb_outflows(years=range(2010, 2023))

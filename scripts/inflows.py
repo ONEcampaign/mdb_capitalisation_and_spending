@@ -4,6 +4,7 @@ from oda_data import set_data_path, read_multisystem
 from scripts import config
 from scripts.logger import logger
 
+
 set_data_path(config.Paths.raw_data)
 
 
@@ -68,6 +69,23 @@ def pivot_flow(df: pd.DataFrame) -> pd.DataFrame:
         values="amount",
     )
 
+    return df.reset_index()
+
+
+def add_mdb_total(df: pd.DataFrame, column_name: str = "channel_name") -> pd.DataFrame:
+    """Add a yearly total for the MDBs being studied."""
+    df_total = (
+        df.groupby(by=["year", "channel_name"], observed=True, dropna=False)[
+            ["Commitments", "Disbursements"]
+        ]
+        .sum()
+        .reset_index()
+    )
+
+    df_total[column_name] = "Total"
+
+    df = pd.concat([df, df_total], ignore_index=True)
+
     return df
 
 
@@ -92,10 +110,13 @@ def export_mdb_inflows(years: list[int] | range) -> None:
     # summarise the data by mdb and pivot the flow
     df = df.pipe(group_by_mdb).pipe(pivot_flow)
 
+    # Add mdb total
+    df = add_mdb_total(df, column_name="channel_name")
+
     # Save the data
-    df.to_csv(config.Paths.output / "mdb_inflows.csv")
+    df.to_csv(config.Paths.output / "mdb_inflows.csv", index=False)
     logger.info("Data saved to mdb_inflows.csv")
 
 
 if __name__ == "__main__":
-    export_mdb_inflows(range(2010, 2022))
+    export_mdb_inflows(range(2010, 2023))
