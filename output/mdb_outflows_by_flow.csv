@@ -23,7 +23,7 @@ year,donor_name,flow_name,usd_commitment,usd_disbursement
 2022,Inter-American Development Bank,Grants,166.28033,232.75048
 2022,Islamic Development Bank,Concessional loans,283.336117,203.439152
 2022,Caribbean Development Bank,Non-concessional loans,16.97,146.327419
-2022,Black Sea Trade & Development Bank,Non-concessional loans,15.0,117.417184
+2022,Black Sea Trade and Development Bank,Non-concessional loans,15.0,117.417184
 2022,Islamic Development Bank,Grants,43.642952,87.582802
 2022,North American Development Bank,Non-concessional loans,23.987000000000002,23.987000000000002
 2022,African Development Bank,Grants,16.363228,17.015159
@@ -55,7 +55,7 @@ year,donor_name,flow_name,usd_commitment,usd_disbursement
 2021,Asian Development Bank,Grants,575.23161,531.703901
 2021,Central American Bank for Economic Integration,Concessional loans,0.0,384.075434
 2021,Inter-American Development Bank,Grants,352.447003,277.294097
-2021,Black Sea Trade & Development Bank,Non-concessional loans,72.967914,275.43009
+2021,Black Sea Trade and Development Bank,Non-concessional loans,72.967914,275.43009
 2021,European Investment Bank,Equity investment,206.900426,191.190868
 2021,Total,Equity investment,206.900426,191.190868
 2021,Caribbean Development Bank,Grants,18.84066,104.116162
@@ -92,7 +92,7 @@ year,donor_name,flow_name,usd_commitment,usd_disbursement
 2020,Inter-American Development Bank,Concessional loans,595.01,920.6211420000001
 2020,European Investment Bank,Non-concessional loans,364.02849000000003,914.104842
 2020,Central American Bank for Economic Integration,Concessional loans,1996.797,476.964
-2020,Black Sea Trade & Development Bank,Non-concessional loans,262.478632,439.95835300000005
+2020,Black Sea Trade and Development Bank,Non-concessional loans,262.478632,439.95835300000005
 2020,Total,Equity investment,268.15270599999997,251.965176
 2020,European Investment Bank,Equity investment,248.152706,237.69459
 2020,Council of Europe Development Bank,Non-concessional loans,1035.897436,222.850105
