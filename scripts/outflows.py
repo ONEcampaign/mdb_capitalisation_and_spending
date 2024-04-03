@@ -18,10 +18,8 @@ def keep_study_mdbs(df: pd.DataFrame) -> pd.DataFrame:
         lambda d: (d.donor_code != 918) | ((d.donor_code == 918) & (d.agency_code == 3))
     ]
 
-    # Change donor name for agency 3 of 918 (European Investment Bank)
-    df.loc[(df.donor_code == 918) & (df.agency_code == 3), "donor_name"] = (
-        "European Investment Bank"
-    )
+    # Map names to codes
+    df["donor_name"] = df.donor_code.map(config.MDBS)
 
     return df
 
@@ -98,6 +96,9 @@ def export_mdb_outflows(years: list[int] | range) -> None:
     df_summary.to_csv(config.Paths.output / "mdb_outflows_summary.csv", index=False)
     logger.info("Data saved to mdb_outflows_summary.csv")
 
+    return df_by_flow
+
 
 if __name__ == "__main__":
-    export_mdb_outflows(years=range(2010, 2023))
+    df = export_mdb_outflows(years=range(2010, 2023))
+    latest = df.query("year == 2022")
