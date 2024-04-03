@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "mdb-capitalisation"
+name = "scripts"
 version = "0.1.0"
 description = "Data on inflows and outflows to/from major MDBs"
 authors = ["Jorge Rivera <jorge.rivera@one.org>"]
