@@ -72,17 +72,17 @@ def pivot_flow(df: pd.DataFrame) -> pd.DataFrame:
     return df.reset_index()
 
 
-def add_mdb_total(df: pd.DataFrame, column_name: str = "channel_name") -> pd.DataFrame:
+def add_mdb_total(df: pd.DataFrame) -> pd.DataFrame:
     """Add a yearly total for the MDBs being studied."""
     df_total = (
-        df.groupby(by=["year", "channel_name"], observed=True, dropna=False)[
+        df.groupby(by=["year"], observed=True, dropna=False)[
             ["Commitments", "Disbursements"]
         ]
         .sum()
         .reset_index()
     )
 
-    df_total[column_name] = "Total"
+    df_total["channel_name"] = "Total"
 
     df = pd.concat([df, df_total], ignore_index=True)
 
@@ -111,7 +111,7 @@ def export_mdb_inflows(years: list[int] | range) -> None:
     df = df.pipe(group_by_mdb).pipe(pivot_flow)
 
     # Add mdb total
-    df = add_mdb_total(df, column_name="channel_name")
+    df = add_mdb_total(df)
 
     # Save the data
     df.to_csv(config.Paths.output / "mdb_inflows.csv", index=False)
